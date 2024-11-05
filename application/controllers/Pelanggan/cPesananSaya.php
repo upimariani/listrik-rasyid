@@ -23,6 +23,7 @@ class cPesananSaya extends CI_Controller
 	public function detail_pesanan($id_transaksi)
 	{
 		$data = array(
+			'id_transaksi' => $id_transaksi,
 			'detail' => $this->mPesananSaya->detail_pesanan($id_transaksi)
 		);
 		$this->load->view('Pelanggan/Layouts/head');
@@ -61,39 +62,11 @@ class cPesananSaya extends CI_Controller
 	}
 	public function diterima($id_transaksi)
 	{
-		//menambahkan point pelanggan
-		$dt_pelanggan = $this->db->query("SELECT * FROM `pelanggan` WHERE id_pelanggan='" . $this->session->userdata('id_pelanggan') . "'")->row();
-		$dt_point = $this->db->query("SELECT * FROM `transaksi_obat` WHERE id_transaksi='" . $id_transaksi . "'")->row();
-		$point = $dt_point->point_transaksi + $dt_pelanggan->point;
-
-		//level member
-		//clasic, silver, gold
-		//clasic != 
-		//silver 10%
-		//gold 15%
-		if ($point <= 1000) {
-			$lev_member = '3';
-		} else if (1000 < $point && $point <= 10000) {
-			$lev_member = '2';
-		} else if ($point > 10000) {
-			$lev_member = '1';
-		}
-
-
-		$update_point = array(
-			'point' => $point,
-			'level_member' => $lev_member
-		);
-		$this->db->where('id_pelanggan', $dt_pelanggan->id_pelanggan);
-		$this->db->update('pelanggan', $update_point);
-
-
-
 		$data = array(
-			'stat_transaksi' => '4'
+			'stat_transaksi' => '3'
 		);
 		$this->db->where('id_transaksi', $id_transaksi);
-		$this->db->update('transaksi_obat', $data);
+		$this->db->update('transaksi', $data);
 
 		$this->session->set_flashdata('success', 'Pesanan Berhasil Diterima!');
 		redirect('Pelanggan/cPesananSaya/detail_pesanan/' . $id_transaksi);
@@ -101,10 +74,12 @@ class cPesananSaya extends CI_Controller
 	public function review($id_transaksi)
 	{
 		$data = array(
+			'id_transaksi' => $id_transaksi,
+			'rating' => $this->input->post('rating'),
 			'review' => $this->input->post('review')
 		);
-		$this->db->where('id_transaksi', $id_transaksi);
-		$this->db->update('transaksi_obat', $data);
+		$this->db->insert('penilaian', $data);
+
 		$this->session->set_flashdata('success', 'Review Berhasil Dikirim!');
 		redirect('Pelanggan/cPesananSaya/detail_pesanan/' . $id_transaksi);
 	}

@@ -6,8 +6,8 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1>
-						Transaksi Produk <b>Keripik Pedas Hikmah</b>
-						<small>Reseller</small>
+						Transaksi Produk <b>Listrik Rasyid Syidiq</b>
+						<small>Pelanggan</small>
 					</h1>
 				</div>
 				<div class="col-sm-6">
@@ -39,10 +39,10 @@
 							<ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
 								<?php
 								//notifikasi
-								$belum_bayar = $this->db->query("SELECT COUNT(id_tranbj) as jml FROM `transaksi_bj` WHERE status='0'")->row();
-								$menunggu = $this->db->query("SELECT COUNT(id_tranbj) as jml FROM `transaksi_bj` WHERE status='1'")->row();
-								$dikirim = $this->db->query("SELECT COUNT(id_tranbj) as jml FROM `transaksi_bj` WHERE status='2'")->row();
-								$selesai = $this->db->query("SELECT COUNT(id_tranbj) as jml FROM `transaksi_bj` WHERE status='3' AND stat_selesai='0'")->row();
+								$belum_bayar = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='0'")->row();
+								$menunggu = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='1'")->row();
+								$dikirim = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='2'")->row();
+								$selesai = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='3'")->row();
 								?>
 								<li class="nav-item">
 									<a class="nav-link active btn-danger" id="custom-tabs-three-home-tab" data-toggle="pill" href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home" aria-selected="true">Pesanan Belum Bayar <span class="badge badge-warning"><?= $belum_bayar->jml ?></span></a>
@@ -67,6 +67,8 @@
 												<tr>
 													<th>No</th>
 													<th>Tanggal Transaksi</th>
+													<th>Metode Pengiriman</th>
+													<th>Metode Pembayaran</th>
 													<th>Total Pembayaran</th>
 													<th>Status</th>
 													<th>Produk</th>
@@ -76,40 +78,42 @@
 												<?php
 												$no = 1;
 												foreach ($transaksi as $key => $value) {
-													if ($value->status == '0') {
+													if ($value->stat_transaksi == '0') {
 												?>
 														<tr>
 															<td><?= $no++ ?>.</td>
 															<td><?= $value->tgl_transaksi ?></td>
+															<td><?php if ($value->metode_pengiriman == '1') {
+																	echo 'COD';
+																} else {
+																	echo 'Delivery';
+																} ?></td>
+															<td><?php if ($value->metode_pembayaran == '1') {
+																	echo 'DANA';
+																} else {
+																	echo 'OVO';
+																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
-															<td><?php if ($value->status == '0') {
+															<td><?php if ($value->stat_transaksi == '0') {
 																?>
 																	<span class="badge badge-danger">Belum Bayar</span>
 																<?php
-																} else if ($value->status == '1') {
+																} else if ($value->stat_transaksi == '1') {
 																?>
 																	<span class="badge badge-warning">Menunggu Konfirmasi</span>
 																<?php
-																} else if ($value->status == '2') {
+																} else if ($value->stat_transaksi == '2') {
 																?>
 																	<span class="badge badge-info">Pesanan Dikirim</span>
 																<?php
-																} else if ($value->status == '3') {
+																} else if ($value->stat_transaksi == '3') {
 																?>
 																	<span class="badge badge-success">Selesai</span>
 																<?php
 																} ?>
 															</td>
 															<td>
-																<?php
-																// bahan baku yang dipesan
-																$bj = $this->db->query("SELECT * FROM `transaksi_bj` JOIN detail_transaksibj ON transaksi_bj.id_tranbj=detail_transaksibj.id_tranbj JOIN bahan_jadi ON bahan_jadi.id_bj=detail_transaksibj.id_bj WHERE transaksi_bj.id_tranbj='" . $value->id_tranbj . "'")->result();
-																foreach ($bj as $key => $value) {
-																?>
-																	<?= $value->nama_bj ?> (<?= $value->qty_bj ?>x)
-																<?php
-																}
-																?>
+																<a href="<?= base_url('Admin/cTransaksi/detail/' . $value->id_transaksi) ?>" class="btn btn-warning">Detail</a>
 															</td>
 
 														</tr>
@@ -125,20 +129,15 @@
 									</div>
 								</div>
 								<div class="tab-pane fade" id="custom-tabs-three-profile" role="tabpanel" aria-labelledby="custom-tabs-three-profile-tab">
-									<?php
-									$data = array(
-										'stat_selesai' => '1'
-									);
-									$this->db->where('status=3');
-									$this->db->update('transaksi_bj', $data);
 
-									?>
 									<div class="card-body">
 										<table class="example1 table table-bordered table-striped">
 											<thead>
 												<tr>
 													<th>No</th>
 													<th>Tanggal Transaksi</th>
+													<th>Metode Pengiriman</th>
+													<th>Metode Pembayaran</th>
 													<th>Total Pembayaran</th>
 													<th>Status</th>
 													<th>Produk</th>
@@ -148,43 +147,45 @@
 												<?php
 												$no = 1;
 												foreach ($transaksi as $key => $value) {
-													if ($value->status == '1') {
+													if ($value->stat_transaksi == '1') {
 												?>
 														<tr>
 															<td><?= $no++ ?>.</td>
 															<td><?= $value->tgl_transaksi ?></td>
+															<td><?php if ($value->metode_pengiriman == '1') {
+																	echo 'COD';
+																} else {
+																	echo 'Delivery';
+																} ?></td>
+															<td><?php if ($value->metode_pembayaran == '1') {
+																	echo 'DANA';
+																} else {
+																	echo 'OVO';
+																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
-															<td><?php if ($value->status == '0') {
+															<td><?php if ($value->stat_transaksi == '0') {
 																?>
 
 																	<span class="badge badge-danger">Belum Bayar</span>
 
 																<?php
-																} else if ($value->status == '1') {
+																} else if ($value->stat_transaksi == '1') {
 																?>
 																	<span class="badge badge-warning">Menunggu Konfirmasi</span><br>
-																	<a class="btn btn-warning" href="<?= base_url('Gudang/cTransaksi/konfirmasi/' . $value->id_tranbj) ?>"><i class="fas fa-hand-point-right"></i> Konfirmasi Pembayaran</a>
+																	<a class="btn btn-warning" href="<?= base_url('Admin/cTransaksi/konfirmasi/' . $value->id_transaksi . '/' . $value->metode_pengiriman) ?>"><i class="fas fa-hand-point-right"></i> Konfirmasi Pembayaran</a>
 																<?php
-																} else if ($value->status == '2') {
+																} else if ($value->stat_transaksi == '2') {
 																?>
 																	<span class="badge badge-info">Pesanan Dikirim</span>
 																<?php
-																} else if ($value->status == '3') {
+																} else if ($value->stat_transaksi == '3') {
 																?>
 																	<span class="badge badge-success">Selesai</span>
 																<?php
 																} ?>
 															</td>
 															<td>
-																<?php
-																// bahan baku yang dipesan
-																$bj = $this->db->query("SELECT * FROM `transaksi_bj` JOIN detail_transaksibj ON transaksi_bj.id_tranbj=detail_transaksibj.id_tranbj JOIN bahan_jadi ON bahan_jadi.id_bj=detail_transaksibj.id_bj WHERE transaksi_bj.id_tranbj='" . $value->id_tranbj . "'")->result();
-																foreach ($bj as $key => $value) {
-																?>
-																	<?= $value->nama_bj ?> (<?= $value->qty_bj ?>x)
-																<?php
-																}
-																?>
+																<a href="<?= base_url('Admin/cTransaksi/detail/' . $value->id_transaksi) ?>" class="btn btn-warning">Detail</a>
 															</td>
 
 														</tr>
@@ -206,6 +207,8 @@
 												<tr>
 													<th>No</th>
 													<th>Tanggal Transaksi</th>
+													<th>Metode Pengiriman</th>
+													<th>Metode Pembayaran</th>
 													<th>Total Pembayaran</th>
 													<th>Status</th>
 													<th>Produk</th>
@@ -215,42 +218,44 @@
 												<?php
 												$no = 1;
 												foreach ($transaksi as $key => $value) {
-													if ($value->status == '2') {
+													if ($value->stat_transaksi == '2') {
 												?>
 														<tr>
 															<td><?= $no++ ?>.</td>
 															<td><?= $value->tgl_transaksi ?></td>
+															<td><?php if ($value->metode_pengiriman == '1') {
+																	echo 'COD';
+																} else {
+																	echo 'Delivery';
+																} ?></td>
+															<td><?php if ($value->metode_pembayaran == '1') {
+																	echo 'DANA';
+																} else {
+																	echo 'OVO';
+																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
-															<td><?php if ($value->status == '0') {
+															<td><?php if ($value->stat_transaksi == '0') {
 																?>
 
 																	<span class="badge badge-danger">Belum Bayar</span>
 
 																<?php
-																} else if ($value->status == '1') {
+																} else if ($value->stat_transaksi == '1') {
 																?>
 																	<span class="badge badge-warning">Menunggu Konfirmasi</span>
 																<?php
-																} else if ($value->status == '2') {
+																} else if ($value->stat_transaksi == '2') {
 																?>
 																	<span class="badge badge-info">Pesanan Dikirim</span>
 																<?php
-																} else if ($value->status == '3') {
+																} else if ($value->stat_transaksi == '3') {
 																?>
 																	<span class="badge badge-success">Selesai</span>
 																<?php
 																} ?>
 															</td>
 															<td>
-																<?php
-																// bahan baku yang dipesan
-																$bj = $this->db->query("SELECT * FROM `transaksi_bj` JOIN detail_transaksibj ON transaksi_bj.id_tranbj=detail_transaksibj.id_tranbj JOIN bahan_jadi ON bahan_jadi.id_bj=detail_transaksibj.id_bj WHERE transaksi_bj.id_tranbj='" . $value->id_tranbj . "'")->result();
-																foreach ($bj as $key => $value) {
-																?>
-																	<?= $value->nama_bj ?> (<?= $value->qty_bj ?>x)
-																<?php
-																}
-																?>
+																<a href="<?= base_url('Admin/cTransaksi/detail/' . $value->id_transaksi) ?>" class="btn btn-warning">Detail</a>
 															</td>
 
 														</tr>
@@ -272,6 +277,8 @@
 												<tr>
 													<th>No</th>
 													<th>Tanggal Transaksi</th>
+													<th>Metode Pengiriman</th>
+													<th>Metode Pembayaran</th>
 													<th>Total Pembayaran</th>
 													<th>Status</th>
 													<th>Produk</th>
@@ -281,42 +288,44 @@
 												<?php
 												$no = 1;
 												foreach ($transaksi as $key => $value) {
-													if ($value->status == '3') {
+													if ($value->stat_transaksi == '3') {
 												?>
 														<tr>
 															<td><?= $no++ ?>.</td>
 															<td><?= $value->tgl_transaksi ?></td>
+															<td><?php if ($value->metode_pengiriman == '1') {
+																	echo 'COD';
+																} else {
+																	echo 'Delivery';
+																} ?></td>
+															<td><?php if ($value->metode_pembayaran == '1') {
+																	echo 'DANA';
+																} else {
+																	echo 'OVO';
+																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
-															<td><?php if ($value->status == '0') {
+															<td><?php if ($value->stat_transaksi == '0') {
 																?>
 
 																	<span class="badge badge-danger">Belum Bayar</span>
 
 																<?php
-																} else if ($value->status == '1') {
+																} else if ($value->stat_transaksi == '1') {
 																?>
 																	<span class="badge badge-warning">Menunggu Konfirmasi</span>
 																<?php
-																} else if ($value->status == '2') {
+																} else if ($value->stat_transaksi == '2') {
 																?>
 																	<span class="badge badge-info">Pesanan Dikirim</span>
 																<?php
-																} else if ($value->status == '3') {
+																} else if ($value->stat_transaksi == '3') {
 																?>
 																	<span class="badge badge-success">Selesai</span>
 																<?php
 																} ?>
 															</td>
 															<td>
-																<?php
-																// bahan baku yang dipesan
-																$bj = $this->db->query("SELECT * FROM `transaksi_bj` JOIN detail_transaksibj ON transaksi_bj.id_tranbj=detail_transaksibj.id_tranbj JOIN bahan_jadi ON bahan_jadi.id_bj=detail_transaksibj.id_bj WHERE transaksi_bj.id_tranbj='" . $value->id_tranbj . "'")->result();
-																foreach ($bj as $key => $value) {
-																?>
-																	<?= $value->nama_bj ?> (<?= $value->qty_bj ?>x)
-																<?php
-																}
-																?>
+																<a href="<?= base_url('Admin/cTransaksi/detail/' . $value->id_transaksi) ?>" class="btn btn-warning">Detail</a>
 															</td>
 
 														</tr>

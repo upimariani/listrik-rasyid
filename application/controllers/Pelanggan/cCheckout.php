@@ -12,12 +12,25 @@ class cCheckout extends CI_Controller
 	}
 	public function cod()
 	{
+		//mendapatkan data kupon
+		$id_kupon = $this->input->post('kupon');
+		if ($id_kupon) {
+			$id = $this->input->post('kupon');
+			$dt_kupon = $this->db->query("SELECT * FROM `kupon` WHERE id_kupon='" . $id_kupon . "'")->row();
+			$potongan = $dt_kupon->potongan_harga;
+			$total_bayar = $this->cart->total() - $potongan;
+		} else {
+			$id = 0;
+			$total_bayar = $this->cart->total();
+		}
+
+		//menyimpan ke tabel transaksi
 		$data = array(
 			'id_pelanggan' => $this->session->userdata('id_pelanggan'),
-			'id_kupon' => $this->input->post('kupon'),
+			'id_kupon' => $id,
 			'tgl_transaksi' => date('Y-m-d'),
 			'total_transaksi' => $this->cart->total(),
-			'total_pembayaran' => $this->cart->total(),
+			'total_pembayaran' => $total_bayar,
 			'ongkir' => '0',
 			'stat_transaksi' => '0',
 			'bukti_payment' => '0',
@@ -59,12 +72,24 @@ class cCheckout extends CI_Controller
 	}
 	public function order()
 	{
+		//mendapatkan data kupon
+		$id_kupon = $this->input->post('kupon');
+		if ($id_kupon) {
+			$id = $this->input->post('kupon');
+			$dt_kupon = $this->db->query("SELECT * FROM `kupon` WHERE id_kupon='" . $id_kupon . "'")->row();
+			$potongan = $dt_kupon->potongan_harga;
+			$total_bayar = $this->input->post('total_bayar') - $potongan;
+		} else {
+			$id = 0;
+			$total_bayar = $this->input->post('total_bayar');
+		}
+
 		$data = array(
 			'id_pelanggan' => $this->session->userdata('id_pelanggan'),
-			'id_kupon' => $this->input->post('kupon'),
+			'id_kupon' => $id,
 			'tgl_transaksi' => date('Y-m-d'),
 			'total_transaksi' => $this->cart->total(),
-			'total_pembayaran' => $this->input->post('total_bayar'),
+			'total_pembayaran' => $total_bayar,
 			'ongkir' => $this->input->post('ongkir'),
 			'stat_transaksi' => '0',
 			'bukti_payment' => '0',

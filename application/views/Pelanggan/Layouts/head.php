@@ -21,4 +21,29 @@
 	<link rel="stylesheet" href="<?= base_url('asset/malefashion-master/') ?>css/owl.carousel.min.css" type="text/css">
 	<link rel="stylesheet" href="<?= base_url('asset/malefashion-master/') ?>css/slicknav.min.css" type="text/css">
 	<link rel="stylesheet" href="<?= base_url('asset/malefashion-master/') ?>css/style.css" type="text/css">
+	<style>
+		.checked {
+			color: orange;
+		}
+	</style>
+	<style>
+		.star {
+			margin: 0;
+			padding: 0;
+		}
+
+		.select {
+			cursor: pointer;
+			list-style-type: none;
+			display: inline-block;
+			color: #F0F0F0;
+			text-shadow: 0 0 1px #666666;
+			font-size: 20px;
+		}
+
+		.highlight,
+		.selected {
+			color: #F4B30A;
+		}
+	</style>
 </head>

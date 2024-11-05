@@ -9,7 +9,10 @@ class mKatalog extends CI_Model
 	}
 	public function produk()
 	{
-		return $this->db->query("SELECT * FROM `produk` ")->result();
+		$this->db->select('*, produk.id_produk');
+		$this->db->from('produk');
+		$this->db->join('diskon', 'produk.id_produk = diskon.id_produk', 'left');
+		return $this->db->get()->result();
 	}
 	public function detail_produk($id)
 	{

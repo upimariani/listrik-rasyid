@@ -33,7 +33,49 @@
 <script src="<?= base_url('asset/malefashion-master/') ?>js/mixitup.min.js"></script>
 <script src="<?= base_url('asset/malefashion-master/') ?>js/owl.carousel.min.js"></script>
 <script src="<?= base_url('asset/malefashion-master/') ?>js/main.js"></script>
+<script>
+	function highlightStar(obj, id) {
+		removeHighlight(id);
+		$('#rate-' + id + ' li').each(function(index) {
+			$(this).addClass('highlight');
+			if (index == $('#rate-' + id + ' li').index(obj)) {
+				return false;
+			}
+		});
+	}
 
+	// event yang terjadi pada saat kita mengarahkan kursor kita ke sebuah object
+	function removeHighlight(id) {
+		$('#rate-' + id + ' li').removeClass('selected');
+		$('#rate-' + id + ' li').removeClass('highlight');
+	}
+
+	function addRating(obj, id) {
+		$('#rate-' + id + ' li').each(function(index) {
+			$(this).addClass('selected');
+			$('#rate-' + id + ' #rating').val((index + 1));
+			if (index == $('#rate-' + id + ' li').index(obj)) {
+				return false;
+			}
+		});
+		$.ajax({
+			url: "<?php echo base_url('berita/tambah_rating'); ?>",
+			data: 'id=' + id + '&rating=' + $('#rate-' + id + ' #rating').val(),
+			type: "POST"
+		});
+	}
+
+	function resetRating(id) {
+		if ($('#rate-' + id + ' #rating').val() != 0) {
+			$('#rate-' + id + ' li').each(function(index) {
+				$(this).addClass('selected');
+				if ((index + 1) == $('#rate-' + id + ' #rating').val()) {
+					return false;
+				}
+			});
+		}
+	}
+</script>
 </body>
 
 </html>

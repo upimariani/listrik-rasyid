@@ -21,10 +21,10 @@ class cKatalog extends CI_Controller
 		$this->load->view('Pelanggan/vKatalog', $data);
 		$this->load->view('Pelanggan/Layouts/footer');
 	}
-	public function detail($id_obat)
+	public function detail($id_produk)
 	{
 		$data = array(
-			'detail' => $this->mKatalog->detail_produk($id_obat)
+			'detail' => $this->mKatalog->detail_produk($id_produk)
 		);
 		$this->load->view('Pelanggan/Layouts/head');
 		$this->load->view('Pelanggan/Layouts/header');
@@ -35,32 +35,44 @@ class cKatalog extends CI_Controller
 	//CART----------------------------
 	public function add_cart($id_produk)
 	{
-		$obat = $this->db->query("SELECT * FROM `produk` WHERE id_produk='" . $id_produk . "'")->row();
+		$produk = $this->db->query("SELECT *, produk.id_produk FROM `produk` LEFT JOIN diskon ON diskon.id_produk=produk.id_produk WHERE produk.id_produk='" . $id_produk . "'")->row();
+		if ($produk->diskon) {
+			$hrg = $produk->harga - (($produk->diskon / 100) * $produk->harga);
+		} else {
+			$hrg = $produk->harga;
+		}
+
 		$data = array(
-			'id' => $obat->id_produk,
-			'name' => $obat->nama_produk,
-			'price' => $obat->harga,
+			'id' => $produk->id_produk,
+			'name' => $produk->nama_produk,
+			'price' => $hrg,
 			'qty' => '1',
-			'stok' => $obat->stok,
-			'picture' => $obat->foto
+			'stok' => $produk->stok,
+			'picture' => $produk->foto
 		);
 		$this->cart->insert($data);
-		$this->session->set_flashdata('success', 'Obat berhasil dimasukkan ke keranjang!');
+		$this->session->set_flashdata('success', 'Produk berhasil dimasukkan ke keranjang!');
 		redirect('Pelanggan/cKatalog');
 	}
-	public function addtocart_detail($id_obat)
+	public function addtocart_detail($id_produk)
 	{
-		$obat = $this->db->query("SELECT * FROM `obat` WHERE id_obat='" . $id_obat . "'")->row();
+		$produk = $this->db->query("SELECT *, produk.id_produk FROM `produk` LEFT JOIN diskon ON diskon.id_produk=produk.id_produk WHERE produk.id_produk='" . $id_produk . "'")->row();
+		if ($produk->diskon) {
+			$hrg = $produk->harga - (($produk->diskon / 100) * $produk->harga);
+		} else {
+			$hrg = $produk->harga;
+		}
+
 		$data = array(
-			'id' => $obat->id_obat,
-			'name' => $obat->nama_obat,
-			'price' => $obat->harga,
+			'id' => $produk->id_produk,
+			'name' => $produk->nama_produk,
+			'price' => $hrg,
 			'qty' => $this->input->post('qty'),
-			'stok' => $obat->stok,
-			'picture' => $obat->foto
+			'stok' => $produk->stok,
+			'picture' => $produk->foto
 		);
 		$this->cart->insert($data);
-		$this->session->set_flashdata('success', 'Obat berhasil dimasukkan ke keranjang!');
+		$this->session->set_flashdata('success', 'Produk berhasil dimasukkan ke keranjang!');
 		redirect('Pelanggan/cKatalog');
 	}
 	public function cart()

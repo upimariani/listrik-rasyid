@@ -37,7 +37,7 @@
 										</div>
 										<div class="form-group">
 											<label>Deskripsi Kupon</label>
-											<textarea class="form-control" name="deskripsi" required></textarea>
+											<textarea class="form-control" name="deskripsi" placeholder="Deskripsi Kupon..." required></textarea>
 										</div>
 									</div>
 									<div class="modal-footer justify-content-between">
@@ -160,7 +160,7 @@ foreach ($kupon as $key => $value) {
 						</div>
 						<div class="form-group">
 							<label>Deskripsi Kupon</label>
-							<textarea class="form-control" name="deskripsi" required><?= $value->deskripsi_kupon ?></textarea>
+							<textarea class="form-control" name="deskripsi" placeholder="Deskripsi Kupon..." required><?= $value->deskripsi_kupon ?></textarea>
 						</div>
 					</div>
 					<div class="modal-footer justify-content-between">

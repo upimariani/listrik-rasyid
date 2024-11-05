@@ -38,24 +38,16 @@
 							<h4 class="float-end font-size-15">Invoice #<?= $detail['pelanggan']->id_transaksi ?> <span class="badge bg-success font-size-12 ms-2"><?php if ($detail['pelanggan']->stat_transaksi == '0') {
 																																									?>
 										Belum Bayar
-									<?php
-																																									} else if ($detail['pelanggan']->stat_transaksi == '1') {
+									<?php } else if ($detail['pelanggan']->stat_transaksi == '1') {
 									?>
 										Menunggu Konfirmasi
-									<?php
-																																									} else if ($detail['pelanggan']->stat_transaksi == '2') {
-									?>
-										Pesanan Diproses
-									<?php
-																																									} else if ($detail['pelanggan']->stat_transaksi == '3') {
+									<?php } else if ($detail['pelanggan']->stat_transaksi == '2') {
 									?>
 										Pesanan Dikirim
-									<?php
-																																									} else if ($detail['pelanggan']->stat_transaksi == '4') {
+									<?php } else if ($detail['pelanggan']->stat_transaksi == '3') {
 									?>
 										Pesanan Selesai
-									<?php
-																																									} ?></span></h4>
+									<?php } ?></span></h4>
 							<div class="mb-4">
 								<h2 class="mb-1 text-muted">Listrik Rasyid Syidiq</h2>
 							</div>
@@ -86,7 +78,7 @@
 									</div>
 									<div class="mt-4">
 										<h5 class="font-size-15 mb-1">Invoice Date:</h5>
-										<p><?= $detail['pelanggan']->tgl_transaksi ?>0</p>
+										<p><?= $detail['pelanggan']->tgl_transaksi ?></p>
 									</div>
 
 								</div>
@@ -136,12 +128,31 @@
 										<!-- end tr -->
 
 										<!-- end tr -->
-										<tr>
-											<th scope="row" colspan="4" class="border-0 text-end">
-												Ongkos Kirim :</th>
-											<td class="border-0 text-end">Rp. <?= number_format($value->ongkir) ?></td>
-										</tr>
+										<?php
+										if ($detail['pelanggan']->metode_pengiriman == '2') {
+										?>
+											<tr>
+												<th scope="row" colspan="4" class="border-0 text-end">
+													Ongkos Kirim :</th>
+												<td class="border-0 text-end">Rp. <?= number_format($value->ongkir) ?></td>
+											</tr>
+										<?php
+										}
+										?>
 
+										<?php
+										$kupon = $detail['pelanggan']->id_kupon;
+										if ($kupon) {
+											$dt_kupon = $this->db->query("SELECT * FROM `kupon` WHERE id_kupon='" . $kupon . "'")->row();
+										?>
+											<tr>
+												<th scope="row" colspan="4" class="border-0 text-end">
+													Kupon :</th>
+												<td class="border-0 text-end">Rp. <?= number_format($dt_kupon->potongan_harga) ?></td>
+											</tr>
+										<?php
+										}
+										?>
 										<tr>
 											<th scope="row" colspan="4" class="border-0 text-end">Total</th>
 											<td class="border-0 text-end">
@@ -152,6 +163,7 @@
 
 									</tbody><!-- end tbody -->
 								</table><!-- end table -->
+
 								<?php
 								if ($detail['pelanggan']->stat_transaksi == '0') {
 								?>
@@ -169,7 +181,6 @@
 									<?php
 									}
 									?>
-
 									<small class="text-danger">Transaksi akan otomatis dibatalkan jika pembayaran tidak dilakukan maksimal 1 hari dari proses transaksi</small>
 									<input type="file" name="gambar" class="form-control" required>
 									<button class="primary-btn mt-2" type="submit">Kirim</button>
@@ -177,14 +188,32 @@
 								<?php
 								}
 								?>
+
 								<?php
-								if ($detail['pelanggan']->stat_transaksi == '4' && $detail['pelanggan']->review == NULL) {
+								if ($detail['pelanggan']->stat_transaksi == '3' && $detail['pelanggan']->review == NULL) {
 								?>
 									<hr>
-									<form action="<?= base_url('Pelanggan/cPesananSaya/review/' . $detail['pelanggan']->id_transaksi) ?>" method="POST">
+									<form action="<?= base_url('Pelanggan/cPesananSaya/review/' . $id_transaksi) ?>" method="POST">
 										<label>Review Produk</label><br>
 										<small>Silahkan pelanggan dapat melakukan review produk</small><br>
-										<textarea name="review" class="form-control" required></textarea>
+										<div id='rate-0'>
+											<input type='hidden' name='rating' id='rating'>
+											<?php echo "
+                                                        <ul class='star' onMouseOut=\"resetRating('0')\">"; //untuk menampilan value dari bintang
+											for ($i = 1; $i <= 5; $i++) {
+												if ($i <= 0) {
+													$selected = "selected";
+												} else {
+													$selected = "";
+												}
+												echo "<li class='select' class='$selected' onmouseover=\" highlightStar(this,0)\" onmouseout=\"removeHighlight(0);\" onClick=\"addRating(this,0)\">&#9733;</li>";
+											}
+											echo "<ul>
+                                                    </div> "; ?>
+
+
+										</div>
+										<textarea name="review" class="form-control" placeholder="Masukkan Review Anda..." required></textarea>
 										<button class="primary-btn mt-2" type="submit">Kirim</button>
 									</form>
 								<?php
@@ -197,7 +226,7 @@
 									<a href="javascript:window.print()" class="btn btn-success me-1"><i class="fa fa-print"></i></a>
 									<a href="<?= base_url('Pelanggan/cPesananSaya') ?>" class="btn btn-danger w-md">Kembali</a>
 									<?php
-									if ($detail['pelanggan']->stat_transaksi == '3') {
+									if ($detail['pelanggan']->stat_transaksi == '2') {
 									?>
 										<a href="<?= base_url('Pelanggan/cPesananSaya/diterima/' . $detail['pelanggan']->id_transaksi) ?>" class="btn btn-warning w-md">Pesanan Diterima</a>
 

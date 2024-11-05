@@ -42,7 +42,15 @@
 								<tr>
 									<td><?= $value->tgl_transaksi ?></td>
 									<td>Rp. <?= number_format($value->total_transaksi) ?></td>
-									<td>Rp. <?= number_format($value->ongkir) ?></td>
+									<td><?php if ($value->metode_pengiriman == '1') {
+										?>
+											COD
+										<?php
+										} else {
+										?>
+											Rp. <?= number_format($value->ongkir) ?>
+										<?php
+										} ?></td>
 									<td>Rp. <?= number_format($value->total_pembayaran) ?></td>
 									<td><?php if ($value->stat_transaksi == '0') {
 										?>
@@ -54,13 +62,9 @@
 										<?php
 										} else if ($value->stat_transaksi == '2') {
 										?>
-											<span class="badge badge-primary">Pesanan Diproses</span>
-										<?php
-										} else if ($value->stat_transaksi == '3') {
-										?>
 											<span class="badge badge-info">Pesanan Dikirim</span>
 										<?php
-										} else if ($value->stat_transaksi == '4') {
+										} else if ($value->stat_transaksi == '3') {
 										?>
 											<span class="badge badge-success">Pesanan Selesai</span>
 										<?php

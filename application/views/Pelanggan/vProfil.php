@@ -22,18 +22,7 @@
 							<h4>Nama Pelanggan</h4>
 							<p><?= $pelanggan->nama_pelanggan ?> <br /><?= $pelanggan->no_hp ?></p>
 						</li>
-						<li>
-							<h4>Level Member Pelanggan</h4>
-							<p><?= $pelanggan->point ?> <br /><?php
-																if ($pelanggan->level_member == '3') {
-																	echo 'Clasic';
-																} else if ($pelanggan->level_member == '2') {
-																	echo 'Silver';
-																} else {
-																	echo 'Gold';
-																}
-																?></p>
-						</li>
+
 					</ul>
 				</div>
 			</div>
@@ -46,16 +35,12 @@
 								<input type="text" name="nama" placeholder="Name" value="<?= $pelanggan->nama_pelanggan ?>">
 							</div>
 							<div class="col-lg-6">
-								<label>Alamat <span class="text-danger">*</span></label>
-								<input type="text" name="alamat" placeholder="Email" value="<?= $pelanggan->alamat ?>">
-							</div>
-							<div class="col-lg-6">
 								<label>No Telepon <span class="text-danger">*</span></label>
 								<input type="text" name="no_hp" placeholder="Email" value="<?= $pelanggan->no_hp ?>">
 							</div>
-							<div class="col-lg-6">
-								<label>Jenis Kelamin <span class="text-danger">*</span></label>
-								<input type="text" name="jk" placeholder="Email" value="<?= $pelanggan->jk ?>">
+							<div class="col-lg-12">
+								<label>Alamat <span class="text-danger">*</span></label>
+								<input type="text" name="alamat" placeholder="Email" value="<?= $pelanggan->alamat ?>">
 							</div>
 							<div class="col-lg-6">
 								<label>Username <span class="text-danger">*</span></label>

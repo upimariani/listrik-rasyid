@@ -19,17 +19,17 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="tabs-1" role="tabpanel">
 							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/foto-obat/' . $detail->foto) ?>" alt="">
+								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-2" role="tabpanel">
 							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/foto-obat/' . $detail->foto) ?>" alt="">
+								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
 							</div>
 						</div>
 						<div class="tab-pane" id="tabs-3" role="tabpanel">
 							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/foto-obat/' . $detail->foto) ?>" alt="">
+								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
 							</div>
 						</div>
 
@@ -43,15 +43,15 @@
 			<div class="row d-flex justify-content-center">
 				<div class="col-lg-8">
 					<div class="product__details__text">
-						<h4><?= $detail->nama_obat ?></h4>
+						<h4><?= $detail->nama_produk ?></h4>
 						<p>Stok : <?= $detail->stok ?></p>
 
 						<h3>Rp. <?= number_format($detail->harga) ?></h3>
-						<p><?= $detail->deskripsi_obat ?></p>
+						<p><?= $detail->deskripsi ?></p>
 						<?php
 						if ($this->session->userdata('id_pelanggan')) {
 						?>
-							<form action="<?= base_url('Pelanggan/cKatalog/addtocart_detail/' . $detail->id_obat) ?>" method="POST">
+							<form action="<?= base_url('Pelanggan/cKatalog/addtocart_detail/' . $detail->id_produk) ?>" method="POST">
 								<div class="product__details__cart__option">
 									<div class="quantity">
 										<div class="pro-qty">
@@ -80,7 +80,7 @@
 						</ul>
 						<div class="tab-content">
 							<?php
-							$review = $this->db->query("SELECT * FROM `detail_obat` JOIN transaksi_obat ON detail_obat.id_transaksi=transaksi_obat.id_transaksi JOIN obat ON obat.id_obat=detail_obat.id_obat JOIN pelanggan ON pelanggan.id_pelanggan=transaksi_obat.id_pelanggan WHERE obat.id_obat='" . $detail->id_obat . "' AND review is not NULL")->result();
+							$review = $this->db->query("SELECT * FROM `detail_tran` JOIN transaksi ON detail_tran.id_transaksi=transaksi.id_transaksi JOIN produk ON produk.id_produk=detail_tran.id_produk JOIN pelanggan ON pelanggan.id_pelanggan=transaksi.id_pelanggan JOIN penilaian ON penilaian.id_transaksi=transaksi.id_transaksi WHERE produk.id_produk='" . $detail->id_produk . "'")->result();
 							?>
 							<div class="tab-pane active" id="tabs-6" role="tabpanel">
 								<div class="product__details__tab__content">
@@ -88,8 +88,19 @@
 										<?php
 										foreach ($review as $key => $value) {
 										?>
-											<h5><?= $value->nama_pelanggan ?> <?= $value->time ?></h5>
+											<h5><?= $value->nama_pelanggan ?> <small><?= $value->time ?></small></h5>
+											<div class="rating">
+												<?php
+												for ($i = 0; $i < $value->rating; $i++) {
+												?>
+													<i class="fa fa-star checked"></i>
+												<?php
+												}
+												?>
+											</div>
+
 											<p><?= $value->review ?></p>
+											<hr>
 										<?php
 										}
 										?>

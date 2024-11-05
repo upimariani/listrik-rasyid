@@ -96,8 +96,8 @@
 						</ul>
 						<a href="<?= base_url('Pelanggan/cCheckout') ?>" class="primary-btn mb-3">Pengiriman</a>
 
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
-							Cash On Delivery
+						<button type="button" class="primary-btn" data-toggle="modal" data-target="#exampleModal">
+							AMBIL KE TOKO
 						</button>
 
 
@@ -125,7 +125,7 @@
 		<form action="<?= base_url('Pelanggan/cCheckout/cod') ?>" method="POST">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Cash On Delivery</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Ambil Ke Toko</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>

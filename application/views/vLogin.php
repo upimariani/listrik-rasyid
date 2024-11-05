@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>KERIPIK PEDAS HIKMAH</title>
+	<title>LISTRIK RASYID SYIDIQ</title>
 
 	<!-- Google Font: Source Sans Pro -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -24,9 +24,9 @@
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<!-- /.login-logo -->
-		<div class="card card-outline card-primary">
+		<div class="card card-outline card-success">
 			<div class="card-header text-center">
-				<p class="h1"><b>KERIPIK</b>PEDAS HIKMAH</p>
+				<p class="h1"><b>LISTRIK</b> RASYID SYIDIQ</p>
 			</div>
 			<div class="card-body">
 				<p class="login-box-msg">Silahkan melakukan login untuk mendapatkan hak akses!</p>
@@ -65,9 +65,9 @@
 							</div>
 						</div>
 					</div>
-					Apakah reseller belum memiliki akun? <a class="text-danger" href="<?= base_url('cLogin/registrasi') ?>">Registrasi Disini!</a>
+
 					<div class="social-auth-links text-center mt-2 mb-3">
-						<button type="submit" class="btn btn-block btn-primary">
+						<button type="submit" class="btn btn-block btn-success">
 							<i class="fas fa-sign-in-alt"></i> Login
 						</button>
 

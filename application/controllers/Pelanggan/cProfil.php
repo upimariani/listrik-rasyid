@@ -20,7 +20,6 @@ class cProfil extends CI_Controller
 			'nama_pelanggan' => $this->input->post('nama'),
 			'alamat' => $this->input->post('alamat'),
 			'no_hp' => $this->input->post('no_hp'),
-			'jk' => $this->input->post('jk'),
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
 

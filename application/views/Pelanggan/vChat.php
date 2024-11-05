@@ -35,7 +35,7 @@
 			<ul class="list-unstyled">
 				<?php
 				foreach ($chat as $key => $value) {
-					if ($value->balasan == NULL) {
+					if ($value->admin_send == '0') {
 				?>
 						<li class="d-flex justify-content-between mb-4">
 							<img src="<?= base_url('asset/user.svg') ?>" alt="avatar" class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
@@ -46,7 +46,7 @@
 								</div>
 								<div class="card-body">
 									<p class="mb-0">
-										<?= $value->chat ?>
+										<?= $value->pelanggan_send ?>
 									</p>
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 								</div>
 								<div class="card-body">
 									<p class="mb-0">
-										<?= $value->balasan ?>
+										<?= $value->admin_send ?>
 									</p>
 								</div>
 							</div>
