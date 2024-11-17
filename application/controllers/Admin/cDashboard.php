@@ -51,6 +51,17 @@ class cDashboard extends CI_Controller
 		$this->session->set_flashdata('success', 'Pesan Berhasil dikirim!');
 		redirect('Admin/cDashboard/chat/' . $id_pelanggan);
 	}
+	public function detail_penilaian()
+	{
+		$data = array(
+			'penilaian' => $this->db->query("SELECT * FROM `penilaian` JOIN transaksi ON penilaian.id_transaksi=transaksi.id_transaksi JOIN detail_tran ON detail_tran.id_transaksi=transaksi.id_transaksi JOIN produk ON produk.id_produk=detail_tran.id_produk JOIN pelanggan ON pelanggan.id_pelanggan=transaksi.id_pelanggan")->result()
+		);
+		$this->load->view('Admin/Layouts/head');
+		$this->load->view('Admin/Layouts/navbar');
+		$this->load->view('Admin/Layouts/aside');
+		$this->load->view('Admin/vDetailPenilaian', $data);
+		$this->load->view('Admin/Layouts/footer');
+	}
 }
 
 /* End of file cDashboard.php */

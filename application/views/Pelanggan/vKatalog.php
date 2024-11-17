@@ -65,7 +65,14 @@ if ($this->session->userdata('success') != '') {
 						</div>
 						<div class="product__item__text">
 							<h6><?= $value->nama_produk ?></h6>
-							<a href="<?= base_url('Pelanggan/cKatalog/add_cart/' . $value->id_produk) ?>" class="add-cart">+ Add To Cart</a>
+							<?php
+							if ($this->session->userdata('id_pelanggan')) {
+							?>
+								<a href="<?= base_url('Pelanggan/cKatalog/add_cart/' . $value->id_produk) ?>" class="add-cart">+ Add To Cart</a>
+
+							<?php
+							}
+							?>
 
 							<?php
 							//rating produk 

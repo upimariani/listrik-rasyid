@@ -76,8 +76,10 @@
 							<div class="col-sm-4 mb-3">
 								<p class="lead">Payment Methods: <strong> <?php if ($transaksi['pelanggan']->metode_pembayaran == '1') {
 																				echo 'DANA';
-																			} else {
+																			} else if ($transaksi['pelanggan']->metode_pembayaran == '2') {
 																				echo 'OVO';
+																			} else {
+																				echo 'Transfer Bank';
 																			}  ?> </strong></p>
 								<?php
 								if ($transaksi['pelanggan']->stat_transaksi != '0') {

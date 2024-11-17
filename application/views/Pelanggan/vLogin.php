@@ -17,7 +17,7 @@
 	<!-- Style -->
 	<link rel="stylesheet" href="<?= base_url('asset/login-form-08/') ?>css/style.css">
 
-	<title>LOGIN - LISTRIK RASYID SYIDIQ</title>
+	<title>LOGIN - LISTRIK JAYA ELEKTRIK</title>
 </head>
 
 <body>
@@ -34,7 +34,7 @@
 					<div class="row justify-content-center">
 						<div class="col-md-8">
 							<div class="mb-4">
-								<h3>Sign In to <strong>Listrik Rasyid Syidiq</strong></h3>
+								<h3>Sign In to <strong>Listrik Jaya Elektrik</strong></h3>
 								<p class="mb-4">Silahkan melakukan login untuk melakukan transaksi.</p>
 							</div>
 							<?php

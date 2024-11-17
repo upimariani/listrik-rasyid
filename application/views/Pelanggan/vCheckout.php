@@ -90,6 +90,7 @@
 										<option value="">---Pilih Metode Pembayaran---</option>
 										<option value="1">DANA</option>
 										<option value="2">OVO</option>
+										<option value="3">Via Transfer Bank</option>
 									</select>
 								</div>
 							</div>

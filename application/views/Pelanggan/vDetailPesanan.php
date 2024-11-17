@@ -173,11 +173,15 @@
 									<?php
 									if ($detail['pelanggan']->metode_pembayaran == '1') {
 									?>
-										<small>Pembayaran dapat dilakukan melalui DANA Atas Nama <strong>Listrik Rasyid Syidiq</strong> dengan Nomor Dana. <strong>085-432-948-934</strong></small><br>
+										<small>Pembayaran dapat dilakukan melalui DANA Atas Nama <strong>Listrik Jaya Elektrik</strong> dengan Nomor Dana. <strong>085-432-948-934</strong></small><br>
 									<?php
 									} else if ($detail['pelanggan']->metode_pembayaran == '2') {
 									?>
-										<small>Pembayaran dapat dilakukan melalui OVO Atas Nama <strong>Listrik Rasyid Syidiq</strong> dengan Nomor OVO. <strong>32098-0912-012978</strong></small><br>
+										<small>Pembayaran dapat dilakukan melalui OVO Atas Nama <strong>Listrik Jaya Elektrik</strong> dengan Nomor OVO. <strong>32098-0912-012978</strong></small><br>
+									<?php
+									} else {
+									?>
+										<small>Pembayaran dapat dilakukan melalui Bank BRI Atas Nama <strong>Listrik Jaya Elektrik</strong> dengan Nomor Rekening. <strong>0133-03284-0348</strong></small><br>
 									<?php
 									}
 									?>

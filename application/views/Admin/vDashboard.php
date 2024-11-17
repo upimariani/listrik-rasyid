@@ -75,15 +75,18 @@
 				</div>
 				<!-- /.col -->
 				<div class="col-12 col-sm-6 col-md-3">
-					<div class="info-box mb-3">
-						<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+					<a class="text-info" href="<?= base_url('Admin/cDashboard/detail_penilaian') ?>">
+						<div class="info-box mb-3">
+							<span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
 
-						<div class="info-box-content">
-							<span class="info-box-text">Penilaian</span>
-							<span class="info-box-number"><?= $penilaian->jml ?></span>
+							<div class="info-box-content">
+								<span class="info-box-text">Penilaian</span>
+								<span class="info-box-number"> <small>Klik Detail Penilaian!</small></span>
+
+							</div>
+							<!-- /.info-box-content -->
 						</div>
-						<!-- /.info-box-content -->
-					</div>
+					</a>
 					<!-- /.info-box -->
 				</div>
 				<!-- /.col -->

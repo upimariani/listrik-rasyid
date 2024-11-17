@@ -10,7 +10,7 @@
 						<script>
 							document.write(new Date().getFullYear());
 						</script>
-						LISTRIK RASYID SYIDIQ | KUNINGAN <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">ARIEF</a>
+						LISTRIK JAYA ELEKTRIK | KUNINGAN <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">ARIEF</a>
 					</p>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</div>

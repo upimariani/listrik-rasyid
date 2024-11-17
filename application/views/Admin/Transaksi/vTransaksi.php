@@ -90,8 +90,10 @@
 																} ?></td>
 															<td><?php if ($value->metode_pembayaran == '1') {
 																	echo 'DANA';
-																} else {
+																} else if ($value->metode_pembayaran == '2') {
 																	echo 'OVO';
+																} else {
+																	echo 'Transfer Bank';
 																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
 															<td><?php if ($value->stat_transaksi == '0') {
@@ -159,8 +161,10 @@
 																} ?></td>
 															<td><?php if ($value->metode_pembayaran == '1') {
 																	echo 'DANA';
-																} else {
+																} else if ($value->metode_pembayaran == '2') {
 																	echo 'OVO';
+																} else {
+																	echo 'Transfer Bank';
 																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
 															<td><?php if ($value->stat_transaksi == '0') {
@@ -230,8 +234,10 @@
 																} ?></td>
 															<td><?php if ($value->metode_pembayaran == '1') {
 																	echo 'DANA';
-																} else {
+																} else if ($value->metode_pembayaran == '2') {
 																	echo 'OVO';
+																} else {
+																	echo 'Transfer Bank';
 																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
 															<td><?php if ($value->stat_transaksi == '0') {
@@ -300,8 +306,10 @@
 																} ?></td>
 															<td><?php if ($value->metode_pembayaran == '1') {
 																	echo 'DANA';
-																} else {
+																} else if ($value->metode_pembayaran == '2') {
 																	echo 'OVO';
+																} else {
+																	echo 'Transfer Bank';
 																} ?></td>
 															<td>Rp. <?= number_format($value->total_pembayaran)  ?></td>
 															<td><?php if ($value->stat_transaksi == '0') {

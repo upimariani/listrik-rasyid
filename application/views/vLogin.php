@@ -26,7 +26,7 @@
 		<!-- /.login-logo -->
 		<div class="card card-outline card-success">
 			<div class="card-header text-center">
-				<p class="h1"><b>LISTRIK</b> RASYID SYIDIQ</p>
+				<p class="h1"><b>LISTRIK</b> JAYA ELEKTRIK</p>
 			</div>
 			<div class="card-body">
 				<p class="login-box-msg">Silahkan melakukan login untuk mendapatkan hak akses!</p>
