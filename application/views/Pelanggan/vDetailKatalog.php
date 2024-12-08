@@ -11,36 +11,17 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-lg-3 col-md-3">
 
-				</div>
-				<div class="col-lg-6 col-md-9">
-					<div class="tab-content">
-						<div class="tab-pane active" id="tabs-1" role="tabpanel">
-							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-2" role="tabpanel">
-							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
-							</div>
-						</div>
-						<div class="tab-pane" id="tabs-3" role="tabpanel">
-							<div class="product__details__pic__item">
-								<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
-							</div>
-						</div>
-
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="product__details__content">
 		<div class="container">
 			<div class="row d-flex justify-content-center">
+				<div class="col-lg-4">
+					<div class="product__details__pic__item">
+						<img src="<?= base_url('asset/produk/' . $detail->foto) ?>" alt="">
+					</div>
+				</div>
 				<div class="col-lg-8">
 					<div class="product__details__text">
 						<h4><?= $detail->nama_produk ?></h4>

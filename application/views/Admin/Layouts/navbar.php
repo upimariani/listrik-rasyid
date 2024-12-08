@@ -21,7 +21,7 @@
 				$notif = $this->db->query("SELECT COUNT(id_chatting) as jml FROM `chatting` WHERE status='0' AND admin_send = '0'")->row();
 				//chatting reseller
 				$dt = $this->db->query("SELECT * FROM `chatting` JOIN user ON user.id_user=chatting.id_user JOIN pelanggan ON pelanggan.id_pelanggan=chatting.id_pelanggan GROUP BY pelanggan.id_pelanggan")->result();
-				if ($dt) {
+			
 
 				?>
 					<!-- Messages Dropdown Menu -->
@@ -69,9 +69,7 @@
 
 						</div>
 					</li>
-				<?php
-				}
-				?>
+			
 
 
 

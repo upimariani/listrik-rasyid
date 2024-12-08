@@ -6,7 +6,7 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1>
-						Transaksi Produk <b>Listrik Rasyid Syidiq</b>
+						Transaksi Produk <b>Listrik Jaya Elektrik</b>
 						<small>Pelanggan</small>
 					</h1>
 				</div>

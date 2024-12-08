@@ -7,6 +7,7 @@ class cLogin extends CI_Controller
 
 	public function index()
 	{
+
 		$this->form_validation->set_rules('username', 'Username', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 

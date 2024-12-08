@@ -21,6 +21,18 @@ class cKatalog extends CI_Controller
 		$this->load->view('Pelanggan/vKatalog', $data);
 		$this->load->view('Pelanggan/Layouts/footer');
 	}
+	public function produk_search()
+	{
+		$nama_produk = $this->input->post('nama_produk');
+		$data = array(
+			'kategori' => $this->mKatalog->kategori(),
+			'produk' => $this->mKatalog->produk_search($nama_produk)
+		);
+		$this->load->view('Pelanggan/Layouts/head');
+		$this->load->view('Pelanggan/Layouts/header');
+		$this->load->view('Pelanggan/vKatalogSearch', $data);
+		$this->load->view('Pelanggan/Layouts/footer');
+	}
 	public function detail($id_produk)
 	{
 		$data = array(

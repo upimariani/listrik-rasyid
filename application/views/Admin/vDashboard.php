@@ -89,7 +89,73 @@
 					</a>
 					<!-- /.info-box -->
 				</div>
-				<!-- /.col -->
+				<?php
+				//notifikasi
+				$belum_bayar = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='0'")->row();
+				$menunggu = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='1'")->row();
+				$dikirim = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='2'")->row();
+				$selesai = $this->db->query("SELECT COUNT(id_transaksi) as jml FROM `transaksi` WHERE stat_transaksi='3'")->row();
+				?>
+				<div class="col-md-12">
+					<!-- Info Boxes Style 2 -->
+					<div class="row">
+						<div class="col-lg-3">
+							<div class="info-box mb-3 bg-warning">
+								<span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Belum Bayar</span>
+									<span class="info-box-number"><?= $belum_bayar->jml ?></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="info-box mb-3 bg-success">
+								<span class="info-box-icon"><i class="far fa-heart"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Menunggu Konfirmasi</span>
+									<span class="info-box-number"><?= $menunggu->jml ?></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="info-box mb-3 bg-danger">
+								<span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Pesanan Dikirim</span>
+									<span class="info-box-number"><?= $dikirim->jml ?></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="info-box mb-3 bg-info">
+								<span class="info-box-icon"><i class="far fa-comment"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Pesanan Selesai</span>
+									<span class="info-box-number"><?= $selesai->jml ?></span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+						</div>
+					</div>
+
+					<!-- /.info-box -->
+
+					<!-- /.info-box -->
+
+					<!-- /.info-box -->
+
+					<!-- /.info-box -->
+					<!-- /.col -->
+
+				</div>
+				<!-- /.row -->
 				<div class="col-6 table-responsive">
 					<div class="card bg-light">
 						<div class="card-header">
@@ -114,12 +180,9 @@
 						</div>
 					</div>
 				</div>
+
 			</div>
-			<!-- /.row -->
-
-
-		</div>
-		<!--/. container-fluid -->
+			<!--/. container-fluid -->
 	</section>
 	<!-- /.content -->
 </div>

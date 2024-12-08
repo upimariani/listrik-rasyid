@@ -1,15 +1,26 @@
-<!-- Hero Section Begin -->
-<section class="hero">
-	<div class="hero__slider owl-carousel">
-		<img style="width: auto;" src="<?= base_url('asset/banner.png') ?>">
-		<img style="width: auto;" src="<?= base_url('asset/banner.png') ?>">
+<!-- <img style="width: auto;" src="<?= base_url('asset/abcde.png') ?>"> -->
 
-
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+	<div class="carousel-inner">
+		<div class="carousel-item active">
+			<img class="d-block w-100" src="<?= base_url('asset/abcde.png') ?>" alt="First slide">
+		</div>
+		<div class="carousel-item">
+			<img class="d-block w-100" src="<?= base_url('asset/a1.png') ?>" alt="Second slide">
+		</div>
+		<div class="carousel-item">
+			<img class="d-block w-100" src="<?= base_url('asset/a2.png') ?>" alt="Third slide">
+		</div>
 	</div>
-</section>
-<!-- Hero Section End -->
-
-
+	<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+	</a>
+	<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+	</a>
+</div>
 
 <!-- Product Section Begin -->
 <hr>
@@ -65,11 +76,16 @@ if ($this->session->userdata('success') != '') {
 						</div>
 						<div class="product__item__text">
 							<h6><?= $value->nama_produk ?></h6>
+							<small>Stok: <?= $value->stok ?></small>
 							<?php
 							if ($this->session->userdata('id_pelanggan')) {
 							?>
 								<a href="<?= base_url('Pelanggan/cKatalog/add_cart/' . $value->id_produk) ?>" class="add-cart">+ Add To Cart</a>
 
+							<?php
+							} else {
+							?>
+								<a href="<?= base_url('Pelanggan/cLogin') ?>" class="add-cart">+ Add To Cart</a>
 							<?php
 							}
 							?>

@@ -78,7 +78,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-3">
 					<div class="header__logo">
-						<a href="./index.html"><img src="img/logo.png" alt=""></a>
+						<!-- <a href="./index.html"><img style="width: 150px;" src="<?= base_url('asset/logo.png') ?>" alt=""></a> -->
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6">
@@ -114,14 +114,15 @@
 					</nav>
 				</div>
 				<div class="col-lg-3 col-md-3">
-					<?php
-					$qty = 0;
-					foreach ($this->cart->contents() as $key => $value) {
-						$qty += $value['qty'];
-					}
-					if ($qty != 0) {
-					?>
-						<div class="header__nav__option">
+					<div class="header__nav__option">
+						<?php
+						$qty = 0;
+						foreach ($this->cart->contents() as $key => $value) {
+							$qty += $value['qty'];
+						}
+						if ($qty != 0) {
+						?>
+
 							<?php
 							$qty = 0;
 							foreach ($this->cart->contents() as $key => $value) {
@@ -130,15 +131,25 @@
 							?>
 							<a href="<?= base_url('Pelanggan/cKatalog/cart') ?>"><img src="<?= base_url('asset/malefashion-master/') ?>img/icon/cart.png" alt=""> <span><?= $qty ?></span></a>
 							<div class="price">Rp. <?= number_format($this->cart->total())  ?></div>
-						</div>
-					<?php
-					}
-					?>
 
+						<?php
+						}
+						?>
+						<a href="#" class="search-switch"><img src="<?= base_url('asset/malefashion-master/') ?>img/icon/search.png" alt=""></a>
+					</div>
 				</div>
 			</div>
 			<div class="canvas__open"><i class="fa fa-bars"></i></div>
 		</div>
 	</header>
-
+	<!-- Search Begin -->
+	<div class="search-model">
+		<div class="h-100 d-flex align-items-center justify-content-center">
+			<div class="search-close-switch">+</div>
+			<form action="<?= base_url('Pelanggan/cKatalog/produk_search') ?>" method="POST" class="search-model-form">
+				<input type="text" name="nama_produk" id="search-input" placeholder="Search here....." required>
+			</form>
+		</div>
+	</div>
+	<!-- Search End -->
 	<!-- Header Section End -->

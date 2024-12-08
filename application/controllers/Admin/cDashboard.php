@@ -8,14 +8,18 @@ class cDashboard extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('mChat');
+		$this->load->model('mTransaksi');
 	}
 
 	public function index()
 	{
+		$data = array(
+			'transaksi' => $this->mTransaksi->transaksi()
+		);
 		$this->load->view('Admin/Layouts/head');
 		$this->load->view('Admin/Layouts/navbar');
 		$this->load->view('Admin/Layouts/aside');
-		$this->load->view('Admin/vDashboard');
+		$this->load->view('Admin/vDashboard', $data);
 		$this->load->view('Admin/Layouts/footer');
 	}
 	public function chat($id_pelanggan)

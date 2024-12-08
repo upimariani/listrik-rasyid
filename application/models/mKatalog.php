@@ -14,6 +14,14 @@ class mKatalog extends CI_Model
 		$this->db->join('diskon', 'produk.id_produk = diskon.id_produk', 'left');
 		return $this->db->get()->result();
 	}
+	public function produk_search($nama)
+	{
+		$this->db->select('*, produk.id_produk');
+		$this->db->from('produk');
+		$this->db->join('diskon', 'produk.id_produk = diskon.id_produk', 'left');
+		$this->db->where('nama_produk', $nama);
+		return $this->db->get()->result();
+	}
 	public function detail_produk($id)
 	{
 		return $this->db->query("SELECT * FROM `produk` WHERE id_produk='" . $id . "'")->row();
